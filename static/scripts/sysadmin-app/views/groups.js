@@ -93,12 +93,7 @@ define([
                         Common.closeModal();
                     },
                     error: function(collection, response, options) {
-                        var err_msg;
-                        if (response.responseText) {
-                            err_msg = response.responseJSON.error_msg;
-                        } else {
-                            err_msg = gettext('Please check the network.');
-                        }
+                        var err_msg = Common.prepareCollectionFetchErrorMsg(collection, response, opts);
                         $error.html(err_msg).show();
                         Common.enableButton($submitBtn);
                     }

@@ -214,16 +214,7 @@ define([
                     }
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    var err_msg;
-                    if (xhr.responseText) {
-                        if (xhr.status == 403) {
-                            err_msg = gettext("Permission error");
-                        } else {
-                            err_msg = xhr.responseJSON.error_msg ? Common.HTMLescape(xhr.responseJSON.error_msg) : gettext('Error');
-                        }
-                    } else {
-                        err_msg = gettext('Please check the network.');
-                    }
+                    var err_msg = Common.prepareAjaxErrorMsg(xhr);
                     $('.error', $panel).html(err_msg).show();
                 },
                 complete: function() {
@@ -441,14 +432,8 @@ define([
             var after_op_error = function(xhr) {
                 sending_tip.addClass('hide');
                 Common.enableButton(submit_btn);
-                var err;
-                if (xhr.responseText) {
-                    err = JSON.parse(xhr.responseText).error;
-                } else {
-                    err = gettext("Failed. Please check the network.");
-                }
-                Common.showFormError(form_id, err);
-                Common.enableButton(submit_btn);
+                var error_msg = Common.prepareAjaxErrorMsg(xhr);
+                Common.showFormError(form_id, error_msg);
             };
 
             Common.ajaxPost({
@@ -520,16 +505,7 @@ define([
                     $('.tip', $panel).show();
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    var err_msg;
-                    if (xhr.responseText) {
-                        if (xhr.status == 403) {
-                            err_msg = gettext("Permission error");
-                        } else {
-                            err_msg = xhr.responseJSON.error_msg ? Common.HTMLescape(xhr.responseJSON.error_msg) : gettext('Error');
-                        }
-                    } else {
-                        err_msg = gettext('Please check the network.');
-                    }
+                    var err_msg = Common.prepareAjaxErrorMsg(xhr);
                     $('.error', $panel).html(err_msg).show();
                 },
                 complete: function() {
@@ -669,16 +645,7 @@ define([
                     $table.removeClass('hide');
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    var err_msg;
-                    if (xhr.responseText) {
-                        if (xhr.status == 403) {
-                            err_msg = gettext("Permission error");
-                        } else {
-                            err_msg = xhr.responseJSON.error_msg ? Common.HTMLescape(xhr.responseJSON.error_msg) : gettext('Error');
-                        }
-                    } else {
-                        err_msg = gettext('Please check the network.');
-                    }
+                    var err_msg = Common.prepareAjaxErrorMsg(xhr);
                     $('.error', $panel).html(err_msg).show();
                 },
                 complete: function() {
@@ -842,16 +809,7 @@ define([
                     }
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    var err_msg;
-                    if (xhr.responseText) {
-                        if (xhr.status == 403) {
-                            err_msg = gettext("Permission error");
-                        } else {
-                            err_msg = xhr.responseJSON.error_msg ? Common.HTMLescape(xhr.responseJSON.error_msg) : gettext('Error');
-                        }
-                    } else {
-                        err_msg = gettext('Please check the network.');
-                    }
+                    var err_msg = Common.prepareAjaxErrorMsg(xhr);
                     $('.error', $panel).html(err_msg).show();
                 },
                 complete: function() {
@@ -942,13 +900,7 @@ define([
                     }
                 },
                 error: function(xhr) {
-                    var err_msg;
-                    if (xhr.responseText) {
-                        var parsed_resp = JSON.parse(xhr.responseText);
-                        err_msg = Common.HTMLescape(parsed_resp.error||parsed_resp.error_msg);
-                    } else {
-                        err_msg = gettext("Failed. Please check the network.");
-                    }
+                    var err_msg = Common.prepareAjaxErrorMsg(xhr);
                     $error.html(err_msg).removeClass('hide');
                 },
                 complete: function() {
@@ -1035,13 +987,7 @@ define([
                     }
                 },
                 error: function(xhr) {
-                    var err_msg;
-                    if (xhr.responseText) {
-                        var parsed_resp = JSON.parse(xhr.responseText);
-                        err_msg = Common.HTMLescape(parsed_resp.error||parsed_resp.error_msg);
-                    } else {
-                        err_msg = gettext("Failed. Please check the network.");
-                    }
+                    var err_msg = Common.prepareAjaxErrorMsg(xhr);
                     $error.html(err_msg).removeClass('hide');
                 },
                 complete: function() {

@@ -217,12 +217,7 @@ define([
                     }
                 },
                 error: function(collection, response, options) {
-                    var err_msg;
-                    if (response.responseText) {
-                        err_msg = Common.HTMLescape(response.responseJSON.error_msg);
-                    } else {
-                        err_msg = gettext('Please check the network.');
-                    }
+                    var err_msg = Common.prepareCollectionFetchErrorMsg(collection, response, opts);
                     _this.$error.html(err_msg).show();
                 }
             });
