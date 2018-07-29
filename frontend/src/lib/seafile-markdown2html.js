@@ -4,6 +4,7 @@ var slug = require('remark-slug');
 var remark2rehype = require('remark-rehype');
 var format = require('rehype-format');
 var raw = require('rehype-raw');
+var breaks = require('remark-breaks');
 var xtend = require('xtend');
 var toHTML = require('hast-util-to-html');
 var sanitize = require('hast-util-sanitize');
@@ -40,6 +41,7 @@ function stringify(config) {
 // markdown -> mdast -> html AST -> html
 var processor = unified()
   .use(markdown, {commonmark: true})
+  .use(breaks)
   .use(slug)
   .use(remark2rehype, {allowDangerousHTML: true})
   .use(raw)
